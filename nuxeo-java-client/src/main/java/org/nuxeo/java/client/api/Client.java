@@ -16,6 +16,8 @@
  */
 package org.nuxeo.java.client.api;
 
+import java.util.Queue;
+
 import org.nuxeo.java.client.api.cache.NuxeoResponseCache;
 
 import retrofit.Retrofit;
@@ -79,4 +81,9 @@ public interface Client {
      * @return Cache Status.
      */
     boolean isCacheEnabled();
+
+    /**
+     * @return the Nuxeo queue calls to send.
+     */
+    Queue getNuxeoQueue();
 }

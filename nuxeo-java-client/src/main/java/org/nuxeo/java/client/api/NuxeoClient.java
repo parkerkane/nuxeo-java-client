@@ -16,6 +16,8 @@
  */
 package org.nuxeo.java.client.api;
 
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.concurrent.TimeUnit;
 
 import org.nuxeo.java.client.api.cache.NuxeoResponseCache;
@@ -24,7 +26,6 @@ import org.nuxeo.java.client.api.marshaller.NuxeoConverterFactory;
 import org.nuxeo.java.client.api.marshaller.NuxeoMarshaller;
 import org.nuxeo.java.client.api.objects.CurrentUser;
 import org.nuxeo.java.client.api.objects.Operation;
-import org.nuxeo.java.client.api.objects.OperationBody;
 import org.nuxeo.java.client.api.objects.Repository;
 import org.nuxeo.java.client.internals.spi.NuxeoClientException;
 import org.nuxeo.java.client.internals.spi.auth.BasicAuthInterceptor;
@@ -53,6 +54,8 @@ public class NuxeoClient implements Client {
 
     protected final Retrofit.Builder builder;
 
+    private final Queue nuxeoQueue;
+
     protected NuxeoResponseCache nuxeoCache;
 
     protected final NuxeoConverterFactory converterFactory;
@@ -75,6 +78,7 @@ public class NuxeoClient implements Client {
         if (enableDefaultCache) {
             nuxeoCache = new ResultCacheInMemory();
         }
+        nuxeoQueue = new LinkedList();
         retrofit = builder.client(httpClient).build();
         currentUser = new CurrentUser(this);
         repository = new Repository(this);
@@ -211,4 +215,8 @@ public class NuxeoClient implements Client {
         return converterFactory;
     }
 
+    @Override
+    public Queue getNuxeoQueue() {
+        return nuxeoQueue;
+    }
 }

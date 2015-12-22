@@ -92,8 +92,11 @@ public abstract class NuxeoObject {
             }
         }
         try {
+            //TODO JAVACLIENT-28
+            client.getNuxeoQueue().add(methodResult);
             Response<?> response = methodResult.execute();
             if (!response.isSuccess()) {
+                client.getNuxeoQueue().remove(methodResult);
                 NuxeoClientException nuxeoClientException;
                 String errorBody = response.errorBody().string();
                 if (errorBody.equals(Strings.EMPTY)) {
@@ -107,6 +110,7 @@ public abstract class NuxeoObject {
             if (client.isCacheEnabled()) {
                 client.getNuxeoCache().put(cacheKey, response);
             }
+            client.getNuxeoQueue().remove(methodResult);
             return response.body();
         } catch (IOException reason) {
             throw new NuxeoClientException(reason);
