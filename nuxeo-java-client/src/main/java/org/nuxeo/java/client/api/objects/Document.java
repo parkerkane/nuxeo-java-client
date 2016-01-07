@@ -23,13 +23,14 @@ import java.util.List;
 import java.util.Map;
 
 import org.nuxeo.java.client.api.ConstantsV1;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.nuxeo.java.client.api.objects.acl.ACP;
 import org.nuxeo.java.client.api.objects.audit.Audit;
 import org.nuxeo.java.client.api.objects.blob.Blob;
+import org.nuxeo.java.client.api.objects.blob.FileBlob;
 import org.nuxeo.java.client.api.objects.workflow.Workflow;
 import org.nuxeo.java.client.api.objects.workflow.Workflows;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * @since 0.1
@@ -305,39 +306,71 @@ public class Document extends NuxeoEntity {
         return (Document) getResponse(uid, this);
     }
 
+    /* Rendition */
+
+    FileBlob fetchRendition(String renditionName) {
+        return fetchRenditionById(uid, renditionName);
+    }
+
+    FileBlob fetchRenditionById(String documentId, String renditionName) {
+        return (FileBlob) getResponse(documentId, renditionName);
+    }
+
+    /* Convert */
+
+    public FileBlob fetchConvertOnBlob() {
+        return fetchConvertOnBlob(ConstantsV1.DEFAULT_FILE_CONTENT);
+    }
+
+    public FileBlob fetchConvertOnBlob(String fieldPath) {
+        return fetchConvertOnBlobById(uid, fieldPath);
+    }
+
+    protected FileBlob fetchConvertOnBlobById(String documentId, String fieldPath) {
+        return (FileBlob) getResponse(documentId, fieldPath);
+    }
+
+    public FileBlob fetchConvert() {
+        return fetchConvertById(uid);
+    }
+
+    protected FileBlob fetchConvertById(String documentId) {
+        return (FileBlob) getResponse(documentId);
+    }
+
     /* Audit */
 
-    public Audit fetchAudit(){
+    public Audit fetchAudit() {
         return fetchAuditById(uid);
     }
 
-    public Audit fetchAuditById(String documentId){
+    protected Audit fetchAuditById(String documentId) {
         return (Audit) getResponse(documentId);
     }
 
     /* ACP */
 
-    public ACP fetchACP(){
+    public ACP fetchACP() {
         return fetchACPById(uid);
     }
 
-    public ACP fetchACPById(String documentId){
+    protected ACP fetchACPById(String documentId) {
         return (ACP) getResponse(documentId);
     }
 
     /* Children */
 
-    public Documents fetchChildren(){
+    public Documents fetchChildren() {
         return fetchChildrenById(uid);
     }
 
-    public Documents fetchChildrenById(String parentId){
+    protected Documents fetchChildrenById(String parentId) {
         return (Documents) getResponse(parentId);
     }
 
     /* Blobs */
 
-    public Blob fetchBlob(){
+    public Blob fetchBlob() {
         return fetchBlobById(uid, ConstantsV1.DEFAULT_FILE_CONTENT);
     }
 

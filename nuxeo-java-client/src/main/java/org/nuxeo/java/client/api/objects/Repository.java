@@ -24,6 +24,7 @@ import org.nuxeo.java.client.api.methods.RepositoryAPI;
 import org.nuxeo.java.client.api.objects.acl.ACP;
 import org.nuxeo.java.client.api.objects.audit.Audit;
 import org.nuxeo.java.client.api.objects.blob.Blob;
+import org.nuxeo.java.client.api.objects.blob.FileBlob;
 import org.nuxeo.java.client.api.objects.workflow.Graph;
 import org.nuxeo.java.client.api.objects.workflow.Workflow;
 import org.nuxeo.java.client.api.objects.workflow.Workflows;
@@ -197,6 +198,58 @@ public class Repository extends NuxeoEntity {
     // Call<?> methodResult = getCall(method, parametersArray);
     // methodResult.enqueue(callback);
     // }
+
+    /* Rendition */
+
+    FileBlob fetchRenditionByPath(String documentPath, String renditionName){
+        return (FileBlob) getResponse(documentPath, renditionName);
+    }
+
+    FileBlob fetchRenditionById(String documentId, String renditionName){
+        return (FileBlob) getResponse(documentId, renditionName);
+    }
+
+    FileBlob fetchRenditionByPath(String documentPath, String renditionName, String repositoryName){
+        return (FileBlob) getResponse(documentPath, renditionName, repositoryName);
+    }
+
+    FileBlob fetchRenditionById(String documentId, String renditionName, String repositoryName){
+        return (FileBlob) getResponse(documentId, renditionName, repositoryName);
+    }
+
+    /* Convert */
+
+    public FileBlob fetchConvertByPath(String documentPath){
+        return (FileBlob) getResponse(documentPath);
+    }
+
+    public FileBlob fetchConvertById(String documentId){
+        return (FileBlob) getResponse(documentId);
+    }
+
+    public FileBlob fetchConvertByPath(String documentPath, String repositoryName){
+        return (FileBlob) getResponse(documentPath, repositoryName);
+    }
+
+    public FileBlob fetchConvertById(String documentId, String repositoryName){
+        return (FileBlob) getResponse(documentId, repositoryName);
+    }
+
+    public FileBlob fetchConvertOnBlobByPath(String documentPath, String fieldPath){
+        return (FileBlob) getResponse(documentPath, fieldPath);
+    }
+
+    public FileBlob fetchConvertOnBlobById(String documentId, String fieldPath){
+        return (FileBlob) getResponse(documentId, fieldPath);
+    }
+
+    public FileBlob fetchConvertOnBlobByPath(String documentPath, String fieldPath, String repositoryName){
+        return (FileBlob) getResponse(documentPath, fieldPath, repositoryName);
+    }
+
+    public FileBlob fetchConvertOnBlobById(String documentId, String fieldPath, String repositoryName){
+        return (FileBlob) getResponse(documentId, fieldPath, repositoryName);
+    }
 
     /* Audit */
 

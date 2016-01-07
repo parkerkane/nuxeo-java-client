@@ -104,6 +104,46 @@ public interface RepositoryAPI {
             @Query("sortBy") String sortBy, @Query("sortOrder") String sortOrder,
             @Query("queryParams") String queryParams);
 
+    /* Convert */
+
+    @GET("path/{documentPath}/@convert")
+    Call<FileBlob> fetchConvertByPath(@Path("documentPath") String documentPath);
+
+    @GET("id/{documentId}/@convert")
+    Call<FileBlob> fetchConvertById(@Path("documentId") String documentId);
+
+    @GET("repo/{repositoryName}/path/{documentPath}/@convert")
+    Call<FileBlob> fetchConvertByPath(@Path("documentPath") String documentPath, @Path("repositoryName") String repositoryName);
+
+    @GET("repo/{repositoryName}/id/{documentId}/@convert")
+    Call<FileBlob> fetchConvertById(@Path("documentId") String documentId, @Path("repositoryName") String repositoryName);
+
+    @GET("path/{documentPath}/@blob/{fieldPath}/@convert")
+    Call<FileBlob> fetchConvertOnBlobByPath(@Path("documentPath") String documentPath, @Path("fieldPath") String fieldPath);
+
+    @GET("id/{documentId}/@blob/{fieldPath}/@convert")
+    Call<FileBlob> fetchConvertOnBlobById(@Path("documentId") String documentId, @Path("fieldPath") String fieldPath);
+
+    @GET("repo/{repositoryName}/path/{documentPath}/@blob/{fieldPath}/@convert")
+    Call<FileBlob> fetchConvertOnBlobByPath(@Path("documentPath") String documentPath, @Path("fieldPath") String fieldPath, @Path("repositoryName") String repositoryName);
+
+    @GET("repo/{repositoryName}/id/{documentId}/@blob/{fieldPath}/@convert")
+    Call<FileBlob> fetchConvertOnBlobById(@Path("documentId") String documentId, @Path("fieldPath") String fieldPath, @Path("repositoryName") String repositoryName);
+
+    /* Rendition */
+
+    @GET("path/{documentPath}/@rendition/{renditionName}")
+    Call<FileBlob> fetchRenditionByPath(@Path("documentPath") String documentPath, @Path("renditionName") String renditionName);
+
+    @GET("id/{documentId}/@rendition/{renditionName}")
+    Call<FileBlob> fetchRenditionById(@Path("documentId") String documentId, @Path("renditionName") String renditionName);
+
+    @GET("repo/{repositoryName}/path/{documentPath}/@rendition/{renditionName}")
+    Call<FileBlob> fetchRenditionByPath(@Path("documentPath") String documentPath, @Path("renditionName") String renditionName, @Path("repositoryName") String repositoryName);
+
+    @GET("repo/{repositoryName}/id/{documentId}/@rendition/{renditionName}")
+    Call<FileBlob> fetchRenditionById(@Path("documentId") String documentId, @Path("renditionName") String renditionName, @Path("repositoryName") String repositoryName);
+
     /* Audit */
 
     @GET("path/{documentPath}/@audit")
