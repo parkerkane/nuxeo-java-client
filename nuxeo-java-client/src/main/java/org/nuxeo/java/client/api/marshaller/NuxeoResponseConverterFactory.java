@@ -35,6 +35,7 @@ import org.apache.logging.log4j.Logger;
 import org.nuxeo.java.client.api.ConstantsV1;
 import org.nuxeo.java.client.api.objects.Document;
 import org.nuxeo.java.client.api.objects.Documents;
+import org.nuxeo.java.client.api.objects.NuxeoEntity;
 import org.nuxeo.java.client.api.objects.RecordSet;
 import org.nuxeo.java.client.api.objects.blob.Blob;
 import org.nuxeo.java.client.api.objects.blob.Blobs;
@@ -56,6 +57,8 @@ public final class NuxeoResponseConverterFactory<T> implements Converter<Respons
 
     private static final Logger logger = LogManager.getLogger(NuxeoResponseConverterFactory.class);
 
+    protected Map<String, NuxeoEntity> pojoMarshallers;
+
     protected JavaType javaType;
 
     protected NuxeoMarshaller<T> nuxeoMarshaller;
@@ -64,10 +67,11 @@ public final class NuxeoResponseConverterFactory<T> implements Converter<Respons
 
     protected ObjectReader adapter;
 
-    NuxeoResponseConverterFactory(ObjectReader adapter, ObjectMapper objectMapper, JavaType javaType) {
+    NuxeoResponseConverterFactory(ObjectReader adapter, ObjectMapper objectMapper, JavaType javaType, Map<String, NuxeoEntity> pojoMarshallers) {
         this.adapter = adapter;
         this.objectMapper = objectMapper;
         this.javaType = javaType;
+        this.pojoMarshallers = pojoMarshallers;
     }
 
     NuxeoResponseConverterFactory(NuxeoMarshaller<T> nuxeoMarshaller, ObjectMapper objectMapper) {
@@ -117,17 +121,29 @@ public final class NuxeoResponseConverterFactory<T> implements Converter<Respons
                 case ConstantsV1.ENTITY_TYPE_DOCUMENTS:
                     return (T) readJSON(value.charStream(), Documents.class);
                 default:
+                    for (String type : pojoMarshallers.keySet()) {
+                        if (nuxeoEntity.equals(type)) {
+                            return (T) readJSON(value.charStream(), pojoMarshallers.get(type).getClass());
+                        }
+                    }
                     return (T) value;
                 }
             } else {
                 // This workaround is only for recordsets. There is not header nuxeo-entity set for now serverside.
                 String response = value.string();
                 Object objectResponse = readJSON(response, Object.class);
+                // TODO JAVACLIENT-66
+                String entityType = (String) ((Map<String, Object>) objectResponse).get(ConstantsV1.ENTITY_TYPE);
                 switch ((String) ((Map<String, Object>) objectResponse).get(ConstantsV1.ENTITY_TYPE)) {
                 case ConstantsV1.ENTITY_TYPE_RECORDSET:
                     return (T) readJSON(response, RecordSet.class);
                 default:
-                    return (T) value;
+                    for (String type : pojoMarshallers.keySet()) {
+                        if (entityType.equals(type)) {
+                            return (T) readJSON(response, pojoMarshallers.get(type).getClass());
+                        }
+                    }
+                    return (T) objectResponse;
                 }
             }
         }

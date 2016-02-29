@@ -20,7 +20,6 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 
-import com.sun.deploy.util.StringUtils;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -32,6 +31,7 @@ import org.nuxeo.java.client.api.cache.NuxeoResponseCache;
 import org.nuxeo.java.client.api.cache.ResultCacheInMemory;
 import org.nuxeo.java.client.api.marshaller.NuxeoConverterFactory;
 import org.nuxeo.java.client.api.marshaller.NuxeoMarshaller;
+import org.nuxeo.java.client.api.objects.NuxeoEntity;
 import org.nuxeo.java.client.api.objects.Operation;
 import org.nuxeo.java.client.api.objects.Repository;
 import org.nuxeo.java.client.api.objects.directory.DirectoryManager;
@@ -96,6 +96,11 @@ public class NuxeoClient implements Client {
 
     public NuxeoClient registerMarshaller(NuxeoMarshaller<?> marshaller) {
         converterFactory.registerMarshaller(marshaller);
+        return this;
+    }
+
+    public NuxeoClient registerMarshaller(NuxeoEntity entity) {
+        converterFactory.registerMarshaller(entity);
         return this;
     }
 

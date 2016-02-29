@@ -27,6 +27,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 
+import org.nuxeo.java.client.api.objects.NuxeoEntity;
 import org.nuxeo.java.client.internals.spi.NuxeoClientException;
 
 import retrofit2.Converter;
@@ -44,6 +45,8 @@ import com.fasterxml.jackson.databind.ObjectWriter;
 public class NuxeoConverterFactory extends Converter.Factory {
 
     protected static final Map<Class<?>, NuxeoMarshaller<?>> marshallers = new ConcurrentHashMap<>();
+
+    protected static final Map<String, NuxeoEntity> pojoMarshallers = new ConcurrentHashMap<>();
 
     protected final ObjectMapper mapper;
 
@@ -72,7 +75,7 @@ public class NuxeoConverterFactory extends Converter.Factory {
             return new NuxeoResponseConverterFactory<>(nuxeoMarshaller, mapper);
         }
         ObjectReader reader = mapper.readerFor(javaType);
-        return new NuxeoResponseConverterFactory<>(reader, mapper, javaType);
+        return new NuxeoResponseConverterFactory<>(reader, mapper, javaType, pojoMarshallers);
     }
 
     @Override
@@ -92,6 +95,14 @@ public class NuxeoConverterFactory extends Converter.Factory {
 
     public void clearMarshaller() {
         marshallers.clear();
+    }
+
+    public void registerMarshaller(NuxeoEntity marshaller) {
+        pojoMarshallers.put(marshaller.getEntityType(), marshaller);
+    }
+
+    public void clearPojoMarshaller() {
+        pojoMarshallers.clear();
     }
 
     public Object readJSON(String json, Class javaType) {
