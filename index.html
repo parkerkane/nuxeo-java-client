@@ -217,16 +217,16 @@ inputBlobs<span class="pl-k">.</span>add(<span class="pl-smi">io<span class="pl-
 root <span class="pl-k">=</span> nuxeoClient<span class="pl-k">.</span>repository()<span class="pl-k">.</span>repositoryName(<span class="pl-s"><span class="pl-pds">"</span>other_repo<span class="pl-pds">"</span></span>)<span class="pl-k">.</span>fetchDocumentRoot();</pre></div>
 
 <div class="highlight highlight-source-java"><pre><span class="pl-c">// Fetch document by path</span>
-<span class="pl-smi">Document</span> folder <span class="pl-k">=</span> nuxeoClient<span class="pl-k">.</span>repository()<span class="pl-k">.</span>fetchDocumentByPath(<span class="pl-s"><span class="pl-pds">"</span>folder_2<span class="pl-pds">"</span></span>);</pre></div>
+<span class="pl-smi">Document</span> folder <span class="pl-k">=</span> nuxeoClient<span class="pl-k">.</span>repository()<span class="pl-k">.</span>fetchDocumentByPath(<span class="pl-s"><span class="pl-pds">"</span>/folder_2<span class="pl-pds">"</span></span>);</pre></div>
 
 <div class="highlight highlight-source-java"><pre><span class="pl-c">// Create a document</span>
-<span class="pl-smi">Document</span> folder <span class="pl-k">=</span> nuxeoClient<span class="pl-k">.</span>repository()<span class="pl-k">.</span>fetchDocumentByPath(<span class="pl-s"><span class="pl-pds">"</span>folder_1<span class="pl-pds">"</span></span>);
+<span class="pl-smi">Document</span> folder <span class="pl-k">=</span> nuxeoClient<span class="pl-k">.</span>repository()<span class="pl-k">.</span>fetchDocumentByPath(<span class="pl-s"><span class="pl-pds">"</span>/folder_1<span class="pl-pds">"</span></span>);
 <span class="pl-smi">Document</span> document <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-smi">Document</span>(<span class="pl-s"><span class="pl-pds">"</span>file<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>File<span class="pl-pds">"</span></span>);
 document<span class="pl-k">.</span>set(<span class="pl-s"><span class="pl-pds">"</span>dc:title<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>new title<span class="pl-pds">"</span></span>);
-document <span class="pl-k">=</span> nuxeoClient<span class="pl-k">.</span>repository()<span class="pl-k">.</span>createDocumentByPath(<span class="pl-s"><span class="pl-pds">"</span>folder_1<span class="pl-pds">"</span></span>, document);</pre></div>
+document <span class="pl-k">=</span> nuxeoClient<span class="pl-k">.</span>repository()<span class="pl-k">.</span>createDocumentByPath(<span class="pl-s"><span class="pl-pds">"</span>/folder_1<span class="pl-pds">"</span></span>, document);</pre></div>
 
 <div class="highlight highlight-source-java"><pre><span class="pl-c">// Update a document</span>
-<span class="pl-smi">Document</span> document <span class="pl-k">=</span> nuxeoClient<span class="pl-k">.</span>repository()<span class="pl-k">.</span>fetchDocumentByPath(<span class="pl-s"><span class="pl-pds">"</span>folder_1/note_0<span class="pl-pds">"</span></span>);
+<span class="pl-smi">Document</span> document <span class="pl-k">=</span> nuxeoClient<span class="pl-k">.</span>repository()<span class="pl-k">.</span>fetchDocumentByPath(<span class="pl-s"><span class="pl-pds">"</span>/folder_1/note_0<span class="pl-pds">"</span></span>);
 <span class="pl-smi">Document</span> documentUpdated <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-smi">Document</span>(<span class="pl-s"><span class="pl-pds">"</span>test update<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>Note<span class="pl-pds">"</span></span>);
 documentUpdated<span class="pl-k">.</span>setId(document<span class="pl-k">.</span>getId());
 documentUpdated<span class="pl-k">.</span>set(<span class="pl-s"><span class="pl-pds">"</span>dc:title<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>note updated<span class="pl-pds">"</span></span>);
@@ -235,15 +235,15 @@ documentUpdated<span class="pl-k">.</span>set(<span class="pl-s"><span class="pl
 documentUpdated <span class="pl-k">=</span> nuxeoClient<span class="pl-k">.</span>repository()<span class="pl-k">.</span>updateDocument(documentUpdated);</pre></div>
 
 <div class="highlight highlight-source-java"><pre><span class="pl-c">// Delete a document</span>
-<span class="pl-smi">Document</span> documentToDelete <span class="pl-k">=</span> nuxeoClient<span class="pl-k">.</span>repository()<span class="pl-k">.</span>fetchDocumentByPath(<span class="pl-s"><span class="pl-pds">"</span>folder_1/note_1<span class="pl-pds">"</span></span>);
+<span class="pl-smi">Document</span> documentToDelete <span class="pl-k">=</span> nuxeoClient<span class="pl-k">.</span>repository()<span class="pl-k">.</span>fetchDocumentByPath(<span class="pl-s"><span class="pl-pds">"</span>/folder_1/note_1<span class="pl-pds">"</span></span>);
 nuxeoClient<span class="pl-k">.</span>repository()<span class="pl-k">.</span>deleteDocument(documentToDelete);</pre></div>
 
 <div class="highlight highlight-source-java"><pre><span class="pl-c">// Fetch children</span>
-<span class="pl-smi">Document</span> folder <span class="pl-k">=</span> nuxeoClient<span class="pl-k">.</span>repository()<span class="pl-k">.</span>fetchDocumentByPath(<span class="pl-s"><span class="pl-pds">"</span>folder_2<span class="pl-pds">"</span></span>);
+<span class="pl-smi">Document</span> folder <span class="pl-k">=</span> nuxeoClient<span class="pl-k">.</span>repository()<span class="pl-k">.</span>fetchDocumentByPath(<span class="pl-s"><span class="pl-pds">"</span>/folder_2<span class="pl-pds">"</span></span>);
 <span class="pl-smi">Documents</span> children <span class="pl-k">=</span> folder<span class="pl-k">.</span>fetchChildren();</pre></div>
 
 <div class="highlight highlight-source-java"><pre><span class="pl-c">// Fetch blob</span>
-<span class="pl-smi">Document</span> file <span class="pl-k">=</span> nuxeoClient<span class="pl-k">.</span>repository()<span class="pl-k">.</span>fetchDocumentByPath(<span class="pl-s"><span class="pl-pds">"</span>folder_2/file<span class="pl-pds">"</span></span>);
+<span class="pl-smi">Document</span> file <span class="pl-k">=</span> nuxeoClient<span class="pl-k">.</span>repository()<span class="pl-k">.</span>fetchDocumentByPath(<span class="pl-s"><span class="pl-pds">"</span>/folder_2/file<span class="pl-pds">"</span></span>);
 <span class="pl-smi">Blob</span> blob <span class="pl-k">=</span> file<span class="pl-k">.</span>fetchBlob();</pre></div>
 
 <div class="highlight highlight-source-java"><pre><span class="pl-k">import</span> <span class="pl-smi">org.nuxeo.client.api.objects.audit.Audit</span>;
@@ -294,7 +294,7 @@ nuxeoClient<span class="pl-k">.</span>repository()<span class="pl-k">.</span>fet
 <p>To manage permission, please look inside package  <code>org.nuxeo.client.api.objects.acl</code> to handle ACP, ACL and ACE:</p>
 
 <div class="highlight highlight-source-java"><pre><span class="pl-c">// Fetch Permissions of the current document</span>
-<span class="pl-smi">Document</span> folder <span class="pl-k">=</span> nuxeoClient<span class="pl-k">.</span>repository()<span class="pl-k">.</span>fetchDocumentByPath(<span class="pl-s"><span class="pl-pds">"</span>folder_2<span class="pl-pds">"</span></span>);
+<span class="pl-smi">Document</span> folder <span class="pl-k">=</span> nuxeoClient<span class="pl-k">.</span>repository()<span class="pl-k">.</span>fetchDocumentByPath(<span class="pl-s"><span class="pl-pds">"</span>/folder_2<span class="pl-pds">"</span></span>);
 <span class="pl-smi">ACP</span> acp <span class="pl-k">=</span> folder<span class="pl-k">.</span>fetchPermissions();
 assertTrue(acp<span class="pl-k">.</span>getAcls()<span class="pl-k">.</span>size() <span class="pl-k">!=</span> <span class="pl-c1">0</span>);
 assertEquals(<span class="pl-s"><span class="pl-pds">"</span>inherited<span class="pl-pds">"</span></span>, acp<span class="pl-k">.</span>getAcls()<span class="pl-k">.</span>get(<span class="pl-c1">0</span>)<span class="pl-k">.</span>getName());
@@ -354,7 +354,7 @@ batchUpload <span class="pl-k">=</span> batchUpload<span class="pl-k">.</span>up
 
 <div class="highlight highlight-source-java"><pre><span class="pl-smi">Document</span> doc <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-smi">Document</span>(<span class="pl-s"><span class="pl-pds">"</span>file<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>File<span class="pl-pds">"</span></span>);
 doc<span class="pl-k">.</span>set(<span class="pl-s"><span class="pl-pds">"</span>dc:title<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>new title<span class="pl-pds">"</span></span>);
-doc <span class="pl-k">=</span> nuxeoClient<span class="pl-k">.</span>repository()<span class="pl-k">.</span>createDocumentByPath(<span class="pl-s"><span class="pl-pds">"</span>folder_1<span class="pl-pds">"</span></span>, doc);
+doc <span class="pl-k">=</span> nuxeoClient<span class="pl-k">.</span>repository()<span class="pl-k">.</span>createDocumentByPath(<span class="pl-s"><span class="pl-pds">"</span>/folder_1<span class="pl-pds">"</span></span>, doc);
 doc<span class="pl-k">.</span>set(<span class="pl-s"><span class="pl-pds">"</span>file:content<span class="pl-pds">"</span></span>, batchUpload<span class="pl-k">.</span>getBatchBlob());
 doc <span class="pl-k">=</span> doc<span class="pl-k">.</span>updateDocument();</pre></div>
 
@@ -362,7 +362,7 @@ doc <span class="pl-k">=</span> doc<span class="pl-k">.</span>updateDocument();<
 
 <div class="highlight highlight-source-java"><pre><span class="pl-smi">Document</span> doc <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-smi">Document</span>(<span class="pl-s"><span class="pl-pds">"</span>file<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>File<span class="pl-pds">"</span></span>);
 doc<span class="pl-k">.</span>set(<span class="pl-s"><span class="pl-pds">"</span>dc:title<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>new title<span class="pl-pds">"</span></span>);
-doc <span class="pl-k">=</span> nuxeoClient<span class="pl-k">.</span>repository()<span class="pl-k">.</span>createDocumentByPath(<span class="pl-s"><span class="pl-pds">"</span>folder_1<span class="pl-pds">"</span></span>, doc);
+doc <span class="pl-k">=</span> nuxeoClient<span class="pl-k">.</span>repository()<span class="pl-k">.</span>createDocumentByPath(<span class="pl-s"><span class="pl-pds">"</span>/folder_1<span class="pl-pds">"</span></span>, doc);
 <span class="pl-smi">Operation</span> operation <span class="pl-k">=</span> nuxeoClient<span class="pl-k">.</span>automation(<span class="pl-s"><span class="pl-pds">"</span>Blob.AttachOnDocument<span class="pl-pds">"</span></span>)<span class="pl-k">.</span>param(<span class="pl-s"><span class="pl-pds">"</span>document<span class="pl-pds">"</span></span>, doc);
 <span class="pl-smi">Blob</span> blob <span class="pl-k">=</span> batchUpload<span class="pl-k">.</span>execute(operation);</pre></div>
 
@@ -668,7 +668,7 @@ Allow to use Lambda in the code.</p>
 
   <script>
     $('#toc').toc({
-      'selectors': 'h2, h3', //elements to use as headings
+      'selectors': 'h3, h4', //elements to use as headings
       'container': 'body', //element to find all selectors in
       'smoothScrolling': true, //enable or disable smooth scrolling on click
       'prefix': 'toc', //prefix for anchor tags and class names
