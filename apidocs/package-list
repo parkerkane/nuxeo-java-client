@@ -1,0 +1,17 @@
+org.nuxeo.client.api
+org.nuxeo.client.api.cache
+org.nuxeo.client.api.marshaller
+org.nuxeo.client.api.methods
+org.nuxeo.client.api.objects
+org.nuxeo.client.api.objects.acl
+org.nuxeo.client.api.objects.audit
+org.nuxeo.client.api.objects.blob
+org.nuxeo.client.api.objects.directory
+org.nuxeo.client.api.objects.operation
+org.nuxeo.client.api.objects.task
+org.nuxeo.client.api.objects.upload
+org.nuxeo.client.api.objects.user
+org.nuxeo.client.api.objects.workflow
+org.nuxeo.client.internals.spi
+org.nuxeo.client.internals.spi.auth
+org.nuxeo.client.internals.util
